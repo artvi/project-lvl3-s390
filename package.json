@@ -1,0 +1,42 @@
+{
+  "name": "rss_readerr",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "rss-reader": "dist/bin/rss-reader.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "babel-node": "babel-node",
+    "eslint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artvi/project-lvl3-s390.git"
+  },
+  "author": "artv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artvi/project-lvl3-s390/issues"
+  },
+  "homepage": "https://github.com/artvi/project-lvl3-s390#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jest": "^21.17.0"
+  }
+}
