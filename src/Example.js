@@ -4,6 +4,6 @@ export default class Example {
   }
   init() {
     this.element.textContent = 'Hello there!';
-    console.log('yoyoyo');
+    console.log('log passed');
   }
 }

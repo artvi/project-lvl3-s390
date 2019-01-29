@@ -5,7 +5,7 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, './'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.bundle.js'
   },
   module: {
@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Webpack App',
+      title: 'RSS Reader Here Very Soon',
       template: './src/template.html',
     })
   ]
