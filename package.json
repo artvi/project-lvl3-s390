@@ -2,7 +2,7 @@
   "name": "rss_readerr",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "bin": {
     "rss-reader": "dist/bin/rss-reader.js"
   },
@@ -10,8 +10,9 @@
     "dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "test": "jest",
+    "build": "webpack",
+    "start": "webpack --watch",
     "prepublishOnly": "npm run build",
     "babel-node": "babel-node",
     "eslint": "eslint"
@@ -27,16 +28,37 @@
   },
   "homepage": "https://github.com/artvi/project-lvl3-s390#readme",
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "acorn": "^6.0.5",
+    "acorn-dynamic-import": "^4.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^24.0.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "bootstrap": "^4.2.1",
+    "cli": "^1.0.1",
+    "css-loader": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-jest": "^21.27.2"
+    "eslint-plugin-jest": "^21.27.2",
+    "file-system": "^2.2.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.0.0",
+    "jest-cli": "^24.0.0",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "popper.js": "^1.14.7",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5"
   }
 }
