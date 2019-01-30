@@ -6,16 +6,14 @@
   "bin": {
     "rss-reader": "dist/bin/rss-reader.js"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "test": "jest",
     "build": "webpack",
     "start": "webpack --watch",
     "prepublishOnly": "npm run build",
     "babel-node": "babel-node",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
@@ -27,6 +25,10 @@
     "url": "https://github.com/artvi/project-lvl3-s390/issues"
   },
   "homepage": "https://github.com/artvi/project-lvl3-s390#readme",
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
@@ -36,6 +38,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^24.0.0",
+    "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "bootstrap": "^4.2.1",
