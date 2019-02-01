@@ -31,5 +31,5 @@ export default (state) => {
 
   button.classList.remove(buttonClassToRemove);
   button.classList.add(buttonClassToAdd);
-  button.disabled = !inputIsValid && !loading;
+  button.disabled = !inputIsValid || loading;
 };
