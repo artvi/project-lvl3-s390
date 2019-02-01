@@ -13,6 +13,7 @@ export default () => {
   const state = {
     input: '',
     inputIsValid: false,
+    loading: false,
     feedURLs: [],
     feedFlow: [],
   };
@@ -28,6 +29,7 @@ export default () => {
   const form = document.querySelector('form');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    state.loading = true;
     state.feedURLs = [...state.feedURLs, state.input];
 
     const link = `${proxy}${state.input}`;
@@ -37,16 +39,17 @@ export default () => {
     })
       .catch((err) => {
         if (err) {
-          console.log('Something went wrong. Please, reload the page and try again');
+          alert('Something went wrong. Please, reload the page and try again');
         }
       })
       .then(() => {
+        state.loading = false;
         state.input = '';
         state.inputIsValid = false;
         form.reset();
       });
   });
 
-  watch(state, 'input', () => formRenderer(state));
+  watch(state, ['input', 'loading'], () => formRenderer(state));
   watch(state, 'feedFlow', () => feedRenderer(state));
 };

@@ -1,5 +1,5 @@
 export default (state) => {
-  const { input, inputIsValid } = state;
+  const { input, inputIsValid, loading } = state;
   const inputField = document.getElementById('rss-link');
   const button = document.querySelector('button');
 
@@ -25,7 +25,11 @@ export default (state) => {
 
   const buttonClassToAdd = validationClasses.button[inputIsValid];
   const buttonClassToRemove = validationClasses.button[!inputIsValid];
+  button.innerHTML = loading ?
+    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> loading your feed'
+    : 'Add to feed';
+
   button.classList.remove(buttonClassToRemove);
   button.classList.add(buttonClassToAdd);
-  button.disabled = !inputIsValid;
+  button.disabled = !inputIsValid && !loading;
 };
