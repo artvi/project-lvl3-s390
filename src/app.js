@@ -35,7 +35,7 @@ export default () => {
       const xmlData = xmlParser(response.data);
       state.feedFlow = [...state.feedFlow, xmlData];
     })
-      .then((err) => {
+      .catch((err) => {
         if (err) {
           console.log('Something went wrong. Please, reload the page and try again');
         }

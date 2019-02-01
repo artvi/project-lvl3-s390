@@ -13,7 +13,7 @@ export default (state) => {
         <p class="ml-3">${channelDescription}</p>
       </div>
       <div class="ml-3">
-        <ul id="${id}" class="list-group"></ul>
+        <ul id="${id}" class="list-group col-4"></ul>
       </div>
     `;
   const container = document.createElement('div');

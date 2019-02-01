@@ -2,7 +2,6 @@ export default (state) => {
   const { input, inputIsValid } = state;
   const inputField = document.getElementById('rss-link');
   const button = document.querySelector('button');
-  // change the below check
 
 
   const validationClasses = {
