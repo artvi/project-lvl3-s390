@@ -5,14 +5,23 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <div class="jumbotron">
-      <h1>RSS Reader</h1>
-      <form>
-        <label for="rss-link-field">Put your link here:</label></br>
-        <input id = "rss-link-field" type="text" name="rss">
-        <input type="submit" value="Add link">
-      </form>
+    <div class="p-4">
+      <div class="jumbotron p-3">
+        <h1 class="display-4 ml-3">RSS Reader</h1>
 
+        <form>
+          <div class="form-group ml-3">
+            <!-- <label for="rss-link">Put your link here:</label></br> -->
+            <p>http://habrahabr.ru/rss/hubs/all/</p>
+            <p>http://feeds.bbci.co.uk/news/technology/rss.xml</p>
+            <p>https://hnrss.org/newest</p>
+            <input  type="text" class="form-control form-control-sm col-2" id="rss-link" value="" name="rss" placeholder="Put your rss-link here">
+            <button type="submit" class="btn btn-outline-dark mt-3 btn-sm" disabled>Add to feed</button>
+          </div>
+
+        </form>
+
+      </div>
     </div>
   </body>
 </html>
