@@ -17,7 +17,7 @@ export default () => {
     loading: false,
     feedURLs: [],
     feedItems: [],
-    errors: [],
+    error: null,
   };
 
 
@@ -33,6 +33,7 @@ export default () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     state.loading = true;
+    state.error = null;
     state.feedURLs = [...state.feedURLs, state.input];
 
     const link = `${proxy}${state.input}`;
@@ -48,13 +49,13 @@ export default () => {
       .catch((err) => {
         if (err) {
           state.loading = false;
-          state.errors = [err, ...state.errors];
+          state.error = err;
           console.log('Something went wrong. Please, reload the page and try again');
         }
       });
   });
 
-  watch(state, 'errors', () => alert(state));
+  watch(state, 'error', () => alert(state));
   watch(state, ['input', 'loading'], () => formRenderer(state));
   watch(state, 'feedItems', () => feedRenderer(state));
 };

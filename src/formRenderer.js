@@ -1,7 +1,7 @@
 export default (state) => {
   const { input, inputIsValid, loading } = state;
   const inputField = document.getElementById('rss-link');
-  const button = document.querySelector('button');
+  const button = document.getElementById('add-link-butt');
 
   const validationClasses = {
     field: {
