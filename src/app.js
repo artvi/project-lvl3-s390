@@ -50,7 +50,6 @@ export default () => {
         if (err) {
           state.loading = false;
           state.error = err;
-          console.log('Something went wrong. Please, reload the page and try again');
         }
       });
   });

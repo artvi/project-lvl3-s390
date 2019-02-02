@@ -6,7 +6,7 @@ export default (state) => {
     $('.alert').alert('close');
   } else {
     const alert = `<div class="alert alert-danger" role="alert">
-       ${error}
+       Something went wrong. Please, try again
        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
