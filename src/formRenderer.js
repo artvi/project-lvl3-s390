@@ -3,7 +3,6 @@ export default (state) => {
   const inputField = document.getElementById('rss-link');
   const button = document.querySelector('button');
 
-
   const validationClasses = {
     field: {
       true: 'is-valid',
