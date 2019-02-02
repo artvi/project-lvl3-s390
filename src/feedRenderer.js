@@ -18,8 +18,10 @@ export default (state) => {
     `;
   const container = document.createElement('div');
   container.classList.add('p-4');
-  document.body.appendChild(container);
   container.innerHTML = channelPlate;
+
+  const feedDiv = document.getElementById('feed');
+  feedDiv.prepend(container);
 
 
   const articleList = document.getElementById(`${id}`);
