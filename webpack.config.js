@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'RSS Reader Here Very Soon',
+      title: 'RSS Reader',
       template: 'template.html',
     }),
   ],

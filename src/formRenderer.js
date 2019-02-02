@@ -21,6 +21,7 @@ export default (state) => {
   inputField.classList.add(fieldClassToAdd);
   if (input.length === 0) {
     inputField.classList.remove(fieldClassToAdd, fieldClassToRemove);
+    inputField.value = '';
   }
 
   const buttonClassToAdd = validationClasses.button[inputIsValid];

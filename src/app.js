@@ -2,7 +2,7 @@ import { watch } from 'melanke-watchjs';
 import axios from 'axios';
 import validator from 'validator';
 import formRenderer from './formRenderer';
-import xmlParser from './xmlParser';
+import parseXml from './xmlParser';
 import feedRenderer from './feedRenderer';
 
 
@@ -15,11 +15,12 @@ export default () => {
     inputIsValid: false,
     loading: false,
     feedURLs: [],
-    feedFlow: [],
+    feedItems: [],
   };
 
 
   const inputField = document.getElementById('rss-link');
+
   inputField.addEventListener('input', (e) => {
     const currentInput = e.target.value;
     state.input = currentInput;
@@ -34,22 +35,22 @@ export default () => {
 
     const link = `${proxy}${state.input}`;
     axios.get(link).then((response) => {
-      const xmlData = xmlParser(response.data);
-      state.feedFlow = [...state.feedFlow, xmlData];
+      const data = parseXml(response.data);
+      state.feedItems = [...state.feedItems, data];
     })
-      .catch((err) => {
-        if (err) {
-          alert('Something went wrong. Please, reload the page and try again');
-        }
-      })
       .then(() => {
         state.loading = false;
         state.input = '';
         state.inputIsValid = false;
-        form.reset();
+      })
+      .catch((err) => {
+        if (err) {
+          state.loading = false;
+          console.log('Something went wrong. Please, reload the page and try again');
+        }
       });
   });
 
   watch(state, ['input', 'loading'], () => formRenderer(state));
-  watch(state, 'feedFlow', () => feedRenderer(state));
+  watch(state, 'feedItems', () => feedRenderer(state));
 };
