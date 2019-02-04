@@ -5,7 +5,6 @@ import renderForm from './formRenderer';
 import parse from './xmlParser';
 import renderFeed from './feedRenderer';
 import alert from './alerter';
-// import update from './update';
 
 
 export default () => {
@@ -43,7 +42,7 @@ export default () => {
     axios.get(link).then((response) => {
       const data = parse(response.data);
       data.link = link;
-      state.feedItems = [...state.feedItems, data];
+      state.feedItems = [data, ...state.feedItems];
       state.articles[link] = data.articles;
     })
       .then(() => {
@@ -73,7 +72,10 @@ export default () => {
             const oldArticles = state.articles[link];
             const newList = [...oldArticles, ...newArticles];
             state.articles[link] = newList;
-            console.log(`we have updates for ya: ${newArticles.map(e => e.title)}`);
+            state.updates = [{
+              link,
+              articles: newArticles,
+            }, ...state.updates];
           }
         });
       })
@@ -85,5 +87,5 @@ export default () => {
   watch(state, 'error', () => alert(state));
   watch(state, ['input', 'loading'], () => renderForm(state));
   watch(state, 'feedItems', () => renderFeed(state));
-  watch(state, 'updates', () => console.log(state.updates));
+  watch(state, 'updates', () => renderFeed(state, true));
 };
