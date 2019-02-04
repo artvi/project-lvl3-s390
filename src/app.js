@@ -1,10 +1,11 @@
 import { watch } from 'melanke-watchjs';
 import axios from 'axios';
 import validator from 'validator';
-import formRenderer from './formRenderer';
-import parseXml from './xmlParser';
-import feedRenderer from './feedRenderer';
+import renderForm from './formRenderer';
+import parse from './xmlParser';
+import renderFeed from './feedRenderer';
 import alert from './alerter';
+// import update from './update';
 
 
 export default () => {
@@ -18,6 +19,8 @@ export default () => {
     feedURLs: [],
     feedItems: [],
     error: null,
+    articles: {},
+    updates: [],
   };
 
 
@@ -38,8 +41,10 @@ export default () => {
 
     const link = `${proxy}${state.input}`;
     axios.get(link).then((response) => {
-      const data = parseXml(response.data);
+      const data = parse(response.data);
+      data.link = link;
       state.feedItems = [...state.feedItems, data];
+      state.articles[link] = data.articles;
     })
       .then(() => {
         state.loading = false;
@@ -47,14 +52,38 @@ export default () => {
         state.inputIsValid = false;
       })
       .catch((err) => {
-        if (err) {
-          state.loading = false;
-          state.error = err;
-        }
+        state.loading = false;
+        state.error = err;
       });
   });
 
+  const update = (feedItems) => {
+    const promises = feedItems.map(el => axios.get(el.link));
+    Promise.all(promises)
+      .then((responses) => {
+        responses.forEach((el) => {
+          const link = el.config.url;
+          const updatedData = parse(el.data);
+          const updatedArticles = updatedData.articles;
+
+          const currentTitles = state.articles[link].map(art => art.title);
+          const newArticles = updatedArticles.filter(art => !currentTitles.includes(art.title));
+
+          if (newArticles.length > 0) {
+            const oldArticles = state.articles[link];
+            const newList = [...oldArticles, ...newArticles];
+            state.articles[link] = newList;
+            console.log(`we have updates for ya: ${newArticles.map(e => e.title)}`);
+          }
+        });
+      })
+      .then(() => setTimeout(update, 3000, state.feedItems))
+      .catch(err => console.log(err));
+  };
+  update(state.feedItems);
+
   watch(state, 'error', () => alert(state));
-  watch(state, ['input', 'loading'], () => formRenderer(state));
-  watch(state, 'feedItems', () => feedRenderer(state));
+  watch(state, ['input', 'loading'], () => renderForm(state));
+  watch(state, 'feedItems', () => renderFeed(state));
+  watch(state, 'updates', () => console.log(state.updates));
 };

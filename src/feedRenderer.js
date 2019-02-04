@@ -16,6 +16,7 @@ export default (state) => {
         <ul id="${id}" class="list-group col-4"></ul>
       </div>
     `;
+  // console.log(source);
   const container = document.createElement('div');
   container.classList.add('p-4');
   container.innerHTML = channelPlate;
